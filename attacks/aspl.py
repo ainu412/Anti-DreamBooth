@@ -27,6 +27,7 @@ from transformers import AutoTokenizer, PretrainedConfig
 
 logger = get_logger(__name__)
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class DreamBoothDatasetFromTensor(Dataset):
     """Just like DreamBoothDataset, but take instance_images_tensor instead of path"""
@@ -245,7 +246,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--max_train_steps",
         type=int,
-        default=20,
+        default=2,
         help="Total number of training steps to perform.",
     )
     parser.add_argument(
@@ -379,7 +380,7 @@ def train_one_epoch(
     noise_scheduler,
     vae,
     data_tensor: torch.Tensor,
-    num_steps=20,
+    num_steps=2,
 ):
     # Load the tokenizer
 
@@ -405,7 +406,6 @@ def train_one_epoch(
     )
 
     weight_dtype = torch.bfloat16
-    device = torch.device("cuda")
 
     vae.to(device, dtype=weight_dtype)
     text_encoder.to(device, dtype=weight_dtype)
@@ -470,10 +470,13 @@ def train_one_epoch(
         torch.nn.utils.clip_grad_norm_(params_to_optimize, 1.0, error_if_nonfinite=True)
         optimizer.step()
         optimizer.zero_grad()
-        print(
-            f"Step #{step}, loss: {loss.detach().item()}, prior_loss: {prior_loss.detach().item()}, instance_loss: {instance_loss.detach().item()}"
-        )
 
+        # print(
+        #     f"Step #{step}, loss: {loss.detach().item()}, prior_loss: {prior_loss.detach().item()}, instance_loss: {instance_loss.detach().item()}"
+        # )
+        print(
+            f"Step #{step}, loss: {loss.detach().item()}"
+        )
     return [unet, text_encoder]
 
 
@@ -575,7 +578,7 @@ def main(args):
     accelerator = Accelerator(
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
-        logging_dir=logging_dir,
+        # logging_dir=logging_dir,
     )
 
     logging.basicConfig(
@@ -668,7 +671,7 @@ def main(args):
 
     vae = AutoencoderKL.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="vae", revision=args.revision
-    ).cuda()
+    ).to(device)
 
     vae.requires_grad_(False)
 
