@@ -1,8 +1,8 @@
 import math
 from PIL import Image
 import numpy as np
-from deepface.commons import distance
-from deepface.detectors import (
+from ..commons import distance
+from ..detectors import (
     OpenCvWrapper,
     SsdWrapper,
     DlibWrapper,

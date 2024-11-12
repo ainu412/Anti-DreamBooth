@@ -12,6 +12,8 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
+import torch
+torch.cuda.current_device()
 
 import argparse
 import hashlib
@@ -25,7 +27,7 @@ from typing import Optional
 
 import datasets
 import diffusers
-import torch
+
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
@@ -42,7 +44,6 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
-
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.13.0.dev0")
@@ -318,7 +319,7 @@ def parse_args(input_args=None):
         help="The name of the repository to keep in sync with the local `output_dir`.",
     )
     parser.add_argument(
-        "--logging_dir",
+        "--project_dir",
         type=str,
         default="logs",
         help=(
@@ -539,10 +540,11 @@ def get_full_repo_name(model_id: str, organization: Optional[str] = None, token:
         return f"{organization}/{model_id}"
 
 
-def infer(checkpoint_path, prompts=None, n_img=16, bs=8, n_steps=100, guidance_scale=7.5):
+def infer(checkpoint_path, prompts=None, n_img=4, bs=8, n_steps=100, guidance_scale=7.5):
     pipe = StableDiffusionPipeline.from_pretrained(
         checkpoint_path, torch_dtype=torch.bfloat16, safety_checker=None
     ).to("cuda")
+
     pipe.enable_xformers_memory_efficient_attention()
     pipe.disable_attention_slicing()
 
@@ -575,13 +577,13 @@ class LatentsDataset(Dataset):
 
 
 def main(args):
-    logging_dir = Path(args.output_dir, args.logging_dir)
+    project_dir = Path(args.output_dir, args.project_dir)
 
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
-        logging_dir=logging_dir,
+        logging_dir=project_dir,
     )
 
     # Currently, it's not possible to do gradient accumulation when training two models with accelerate.accumulate

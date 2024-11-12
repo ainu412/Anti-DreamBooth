@@ -1,7 +1,7 @@
-export MODEL_PATH="stable-diffusion/stable-diffusion-2-1-base"
-export INSTANCE_DIR="data/n000050/"
+export MODEL_PATH="stabilityai/stable-diffusion-2-1-base"
+export INSTANCE_DIR="data/161_aspl_edge/set_B"
 export CLASS_DIR="data/class-person"
-export DREAMBOOTH_OUTPUT_DIR="dreambooth-outputs/n000050/"
+export DREAMBOOTH_OUTPUT_DIR="dreambooth-outputs/161_aspl_edge/"
 
 accelerate launch train_dreambooth.py \
   --pretrained_model_name_or_path=$MODEL_PATH  \
@@ -21,10 +21,14 @@ accelerate launch train_dreambooth.py \
   --learning_rate=5e-7 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --max_train_steps=1000 \
   --checkpointing_steps=500 \
   --center_crop \
   --mixed_precision=bf16 \
   --prior_generation_precision=bf16 \
   --sample_batch_size=8
+
+echo $(date +%R)
+
+

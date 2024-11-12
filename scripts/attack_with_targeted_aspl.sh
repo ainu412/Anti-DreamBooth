@@ -1,5 +1,5 @@
 export EXPERIMENT_NAME="T-ASPL"
-export MODEL_PATH="./stable-diffusion/stable-diffusion-2-1-base"
+export MODEL_PATH="stabilityai/stable-diffusion-2-1-base"
 export CLEAN_TRAIN_DIR="data/n000050/set_A" 
 export CLEAN_ADV_DIR="data/n000050/set_B"
 export OUTPUT_DIR="outputs/$EXPERIMENT_NAME/n000050_ADVERSARIAL"
@@ -18,7 +18,7 @@ accelerate launch attacks/aspl.py \
   --instance_data_dir_for_adversarial=$CLEAN_ADV_DIR \
   --instance_prompt="a photo of sks person" \
   --class_data_dir=$CLASS_DIR \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --class_prompt="a photo of person" \
   --output_dir=$OUTPUT_DIR \
   --center_crop \
@@ -59,10 +59,12 @@ accelerate launch train_dreambooth.py \
   --learning_rate=5e-7 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --max_train_steps=1000 \
   --checkpointing_steps=500 \
   --center_crop \
   --mixed_precision=bf16 \
   --prior_generation_precision=bf16 \
   --sample_batch_size=8
+
+echo $(date +%R)

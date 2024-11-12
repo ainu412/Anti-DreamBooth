@@ -10,8 +10,8 @@ import numpy as np
 import tensorflow as tf
 import cv2
 
-from retinaface.model import retinaface_model
-from retinaface.commons import preprocess, postprocess
+from .model import retinaface_model
+from .commons import preprocess, postprocess
 
 #---------------------------
 

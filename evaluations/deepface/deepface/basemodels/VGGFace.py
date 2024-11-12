@@ -1,7 +1,7 @@
 import os
 import gdown
 import tensorflow as tf
-from deepface.commons import functions
+from ..commons import functions
 
 # ---------------------------------------
 

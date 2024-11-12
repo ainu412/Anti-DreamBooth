@@ -1,0 +1,23 @@
+allow_tf32: false
+center_crop: true
+checkpointing_steps: 20
+enable_xformers_memory_efficient_attention: true
+gradient_accumulation_steps: 1
+gradient_checkpointing: false
+instance_data_dir: data/n000050/set_B
+instance_prompt: a photo of sks person
+max_grad_norm: 1.0
+max_train_steps: 100
+mixed_precision: null
+output_dir: outputs/FSMG/n000050_ADVERSARIAL
+pgd_alpha: 0.005
+pgd_eps: 0.05
+pretrained_model_name_or_path: outputs/FSMG/n000050_REFERENCE/checkpoint-1000
+project_dir: logs
+report_to: tensorboard
+resolution: 512
+revision: null
+seed: null
+target_image_path: null
+tokenizer_name: null
+train_text_encoder: true

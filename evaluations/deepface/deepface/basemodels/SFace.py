@@ -3,7 +3,7 @@ import numpy as np
 import cv2 as cv
 import gdown
 
-from deepface.commons import functions
+from ..commons import functions
 
 # pylint: disable=line-too-long, too-few-public-methods
 

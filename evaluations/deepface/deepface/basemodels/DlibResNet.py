@@ -2,7 +2,7 @@ import os
 import bz2
 import gdown
 import numpy as np
-from deepface.commons import functions
+from ..commons import functions
 
 # pylint: disable=too-few-public-methods
 

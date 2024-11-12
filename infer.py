@@ -1,7 +1,10 @@
+import torch
+
+torch.cuda.current_device()
 import argparse
 import os
 
-import torch
+
 from diffusers import StableDiffusionPipeline
 
 

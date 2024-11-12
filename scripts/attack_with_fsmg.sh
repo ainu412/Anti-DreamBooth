@@ -1,5 +1,5 @@
 export EXPERIMENT_NAME="FSMG"
-export MODEL_PATH="./stable-diffusion/stable-diffusion-2-1-base"
+export MODEL_PATH="stabilityai/stable-diffusion-2-1-base"
 export CLASS_DIR="data/class-person"
 export CLEAN_TRAIN_DIR="data/n000050/set_A"
 export REF_MODEL_PATH="outputs/$EXPERIMENT_NAME/n000050_REFERENCE"
@@ -24,7 +24,7 @@ accelerate launch train_dreambooth.py \
   --learning_rate=5e-7 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --max_train_steps=1000 \
   --checkpointing_steps=500 \
   --center_crop \
@@ -78,10 +78,12 @@ accelerate launch train_dreambooth.py \
   --learning_rate=5e-7 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --max_train_steps=1000 \
   --checkpointing_steps=500 \
   --center_crop \
   --mixed_precision=bf16 \
   --prior_generation_precision=bf16 \
   --sample_batch_size=16
+
+echo $(date +%R)

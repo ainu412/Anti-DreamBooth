@@ -1,8 +1,19 @@
+#!/bin/sh
+#SBATCH --gpus=a100-40:1
+
+
+#SBATCH --job-name=ziyi_aspl
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=ziyi.guo@nus.edu.sg
+#SBATCH --mem=25G
+#SBATCH --partition=gpu-long
+
+
 export EXPERIMENT_NAME="ASPL"
-export MODEL_PATH="./stable-diffusion/stable-diffusion-2-1-base"
-export CLEAN_TRAIN_DIR="data/n000050/set_A" 
-export CLEAN_ADV_DIR="data/n000050/set_B"
-export OUTPUT_DIR="outputs/$EXPERIMENT_NAME/n000050_ADVERSARIAL"
+export MODEL_PATH="stabilityai/stable-diffusion-2-1-base"
+export CLEAN_TRAIN_DIR="myfriends/ziyi/set_A"
+export CLEAN_ADV_DIR="myfriends/ziyi/set_B"
+export OUTPUT_DIR="outputs/$EXPERIMENT_NAME/ziyi_ADVERSARIAL"
 export CLASS_DIR="data/class-person"
 
 
@@ -11,14 +22,14 @@ mkdir -p $OUTPUT_DIR
 cp -r $CLEAN_TRAIN_DIR $OUTPUT_DIR/image_clean
 cp -r $CLEAN_ADV_DIR $OUTPUT_DIR/image_before_addding_noise
 
-accelerate launch attacks/aspl.py \
+srun accelerate launch attacks/aspl.py \
   --pretrained_model_name_or_path=$MODEL_PATH  \
   --enable_xformers_memory_efficient_attention \
   --instance_data_dir_for_train=$CLEAN_TRAIN_DIR \
   --instance_data_dir_for_adversarial=$CLEAN_ADV_DIR \
   --instance_prompt="a photo of sks person" \
   --class_data_dir=$CLASS_DIR \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --class_prompt="a photo of person" \
   --output_dir=$OUTPUT_DIR \
   --center_crop \
@@ -33,14 +44,14 @@ accelerate launch attacks/aspl.py \
   --checkpointing_iterations=10 \
   --learning_rate=5e-7 \
   --pgd_alpha=5e-3 \
-  --pgd_eps=5e-2 
+  --pgd_eps=5e-2
 
 
 # ------------------------- Train DreamBooth on perturbed examples -------------------------
 export INSTANCE_DIR="$OUTPUT_DIR/noise-ckpt/50"
-export DREAMBOOTH_OUTPUT_DIR="outputs/$EXPERIMENT_NAME/n000050_DREAMBOOTH"
+export DREAMBOOTH_OUTPUT_DIR="outputs/$EXPERIMENT_NAME/ziyi_DREAMBOOTH"
 
-accelerate launch train_dreambooth.py \
+srun accelerate launch train_dreambooth.py \
   --pretrained_model_name_or_path=$MODEL_PATH  \
   --enable_xformers_memory_efficient_attention \
   --train_text_encoder \
@@ -58,10 +69,14 @@ accelerate launch train_dreambooth.py \
   --learning_rate=5e-7 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
+  --num_class_images=100 \
   --max_train_steps=1000 \
-  --checkpointing_steps=500 \
+  --checkpointing_steps=1000 \
   --center_crop \
   --mixed_precision=bf16 \
   --prior_generation_precision=bf16 \
   --sample_batch_size=8
+
+cp -r $INSTANCE_DIR myfriends/ziyi_aspl
+cp -r $DREAMBOOTH_OUTPUT_DIR dreambooth-outputs/ziyi_aspl
+

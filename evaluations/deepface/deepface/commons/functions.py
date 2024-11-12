@@ -10,7 +10,7 @@ import cv2
 import tensorflow as tf
 
 # package dependencies
-from deepface.detectors import FaceDetector
+from ..detectors import FaceDetector
 
 
 # --------------------------------------------------

@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from deepface import DeepFace
+from deepface.deepface import DeepFace
 import argparse
 
 
@@ -31,14 +31,14 @@ def compute_idx_embedding(paths):
     for path in paths:
         for file in os.listdir(path):
             if file.endswith(".jpg") or file.endswith(".png"):
-                try:
-                   count_file += 1
-                   embedding_objs = DeepFace.represent(img_path = os.path.join(path, file), model_name="ArcFace", detector_backend="retinaface", align=True)
-                   embedding = embedding_objs[0]["embedding"]
-                   embedding = np.array(embedding)
-                   ave_embedding += embedding
-                except:
-                    print(">>>>>>> SKIP", file)
+                # try:
+               count_file += 1
+               embedding_objs = DeepFace.represent(img_path = os.path.join(path, file), model_name="ArcFace", detector_backend="retinaface", align=True, enforce_detection=False)
+               embedding = embedding_objs[0]["embedding"]
+               embedding = np.array(embedding)
+               ave_embedding += embedding
+                # except:
+                #     print(">>>>>>> SKIP", file)
     ave_embedding /= count_file
     return ave_embedding
 

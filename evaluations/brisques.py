@@ -10,9 +10,7 @@ def parse_args():
     return args
 
 
-def main():
-    args = parse_args()
-    prompt_path = args.prompt_path
+def brisque(prompt_path):
     obj = BRISQUE(url=False)
     prompt_score = 0
     count = 0
@@ -28,5 +26,7 @@ def main():
 
 
 if __name__ == '__main__':
-    brisque = main()
-    print("The brisque score is {}".format(brisque))
+    args = parse_args()
+    prompt_path = args.prompt_path
+    brisque_score = brisque(prompt_path)
+    print("The brisque score is {}".format(brisque_score))

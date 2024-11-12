@@ -61,10 +61,11 @@ class SER_FIQ:
 
         """
         
-        if gpu is None:
-            self.device = mx.cpu()
-        else:
-            self.device = mx.gpu(gpu)
+        # if gpu is None:
+        #     self.device = mx.cpu()
+        # else:
+        #     self.device = mx.gpu(gpu)
+        self.device = mx.cpu()
 
         self.insightface = gluon.nn.SymbolBlock.imports(
                                     "./evaluations/FaceImageQuality/insightface/model/insightface-symbol.json",
@@ -107,6 +108,8 @@ class SER_FIQ:
         None, if no face could be detected
 
         """
+        if face_image is None:
+            return None
         detected = self.detector.detect_face(face_image, det_type=self.det)
         
         if detected is None:

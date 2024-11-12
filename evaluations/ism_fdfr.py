@@ -1,7 +1,12 @@
-from deepface import DeepFace
+import time
+
+import torch
+torch.cuda.current_device()
+
+from deepface.deepface import DeepFace
 import numpy as np
 import os
-import torch
+
 import torch.nn.functional as F
 import argparse
 from compute_idx_emb import compute_idx_embedding
@@ -93,6 +98,17 @@ def matching_score_id(image_path, avg_embedding):
 #     return ave_ism/(len(image_list)-fail_detection_count), fail_detection_count/len(image_list)
 
 def matching_score_genimage_id(images_path, list_id_path):
+    """
+    Args:
+        images_path (str): path to generated images
+        list_id_path (str): path to list of clean images
+    Example usage:
+        img_path = "dreambooth-outputs/shirley_aspl_pdmpure"
+        clean_img_paths = ["data/shirley/set_A", "data/shirley/set_B", "data/shirley/set_C"]
+        ism, fdfr = matching_score_genimage_id(img_path, clean_img_paths)
+    """
+
+
     image_list = os.listdir(images_path)
     fail_detection_count = 0
     ave_ism = 0
@@ -101,6 +117,7 @@ def matching_score_genimage_id(images_path, list_id_path):
     for image_name in image_list:
         image_path = os.path.join(images_path, image_name)
         ism = matching_score_id(image_path, avg_embedding)
+        # print('img path', image_path)
         if ism is None:
             fail_detection_count += 1
         else:
@@ -108,6 +125,42 @@ def matching_score_genimage_id(images_path, list_id_path):
     if fail_detection_count != len(image_list):
         return ave_ism/(len(image_list)-fail_detection_count), fail_detection_count/len(image_list)
     return None, 1
+
+def matching_score_genimage_id_alternate(images_path, list_id_path):
+    image_list = os.listdir(images_path)
+    fail_detection_count = 0
+    ave_ism = 0
+    avg_embedding = compute_idx_embedding(list_id_path)
+
+    for image_name in image_list:
+        image_path = os.path.join(images_path, image_name)
+        ism = matching_score_id(image_path, avg_embedding)
+        # print('img path', image_path)
+        if ism is None:
+            fail_detection_count += 1
+        else:
+            ave_ism += ism
+    if fail_detection_count != len(image_list):
+        return ave_ism/len(image_list), fail_detection_count/len(image_list)
+    return None, 1
+
+def matching_score_genimage_id_li(images_path, list_id_path):
+    image_list = os.listdir(images_path)
+    detection_li = []
+    ism_li = []
+    avg_embedding = compute_idx_embedding(list_id_path)
+
+    for image_name in image_list:
+        image_path = os.path.join(images_path, image_name)
+        ism = matching_score_id(image_path, avg_embedding)
+        # print('img path', image_path)
+        if ism is None:
+            detection_li.append(0)
+            ism_li.append(0)
+        else:
+            detection_li.append(1)
+            ism_li.append(ism)
+    return ism_li, detection_li
 
 def parse_args():
     parser = argparse.ArgumentParser(description='FDFR and ISM evaluation')
@@ -120,7 +173,7 @@ def parse_args():
 def main():
     args = parse_args()
     ism, fdr = matching_score_genimage_id(args.data_dir, args.emb_dirs)
-    print("ISM and FDR are {} and {}".format(ism, fdr))
+    print("ISM and FDFR are %.2f and %f" % (ism, fdr))
     
 if __name__ == '__main__':
     main()

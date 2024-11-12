@@ -1,7 +1,9 @@
+import torch
+torch.cuda.current_device()
 import os
 from ism_fdfr import matching_score_genimage_id
 from tqdm import tqdm
-import torch
+
 
 
 data_path = "your_path"

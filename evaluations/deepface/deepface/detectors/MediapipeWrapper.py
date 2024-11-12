@@ -1,4 +1,4 @@
-from deepface.detectors import FaceDetector
+from ..detectors import FaceDetector
 
 # Link - https://google.github.io/mediapipe/solutions/face_detection
 

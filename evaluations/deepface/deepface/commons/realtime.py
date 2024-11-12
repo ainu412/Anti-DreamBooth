@@ -3,8 +3,8 @@ import time
 import numpy as np
 import pandas as pd
 import cv2
-from deepface import DeepFace
-from deepface.commons import functions
+from ...deepface import DeepFace
+from ..commons import functions
 
 # dependency configuration
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"

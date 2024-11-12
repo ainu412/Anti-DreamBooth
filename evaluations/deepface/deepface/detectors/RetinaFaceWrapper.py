@@ -1,5 +1,8 @@
+import sys
+sys.path.append("....")
+
 def build_model():
-    from retinaface import RetinaFace  # this is not a must dependency
+    from retinaface.retinaface import RetinaFace  # this is not a must dependency
 
     face_detector = RetinaFace.build_model()
     return face_detector
@@ -7,8 +10,8 @@ def build_model():
 
 def detect_face(face_detector, img, align=True):
 
-    from retinaface import RetinaFace  # this is not a must dependency
-    from retinaface.commons import postprocess
+    from retinaface.retinaface import RetinaFace  # this is not a must dependency
+    from retinaface.retinaface.commons import postprocess
 
     # ---------------------------------
 
