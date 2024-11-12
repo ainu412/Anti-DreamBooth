@@ -1,0 +1,1 @@
+Best Epoch 78 Best Val 96.524330

@@ -1,0 +1,11 @@
+classes: catface
+batch_size: 32
+workers: 4
+niter: 500
+lr: 0.001
+beta1: 0.9
+cuda: true
+pretrained: true
+seed: 0
+fraction: null
+outf: classifiers/catface_pretrained_lr

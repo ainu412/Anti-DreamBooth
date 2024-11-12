@@ -1,0 +1,1 @@
+Best Epoch 130 Best Val 96.822243

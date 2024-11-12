@@ -1,3 +1,5 @@
+import torch
+torch.cuda.current_device()
 import argparse
 import copy
 import hashlib
@@ -9,7 +11,6 @@ from pathlib import Path
 import datasets
 import diffusers
 import numpy as np
-import torch
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
@@ -25,9 +26,15 @@ from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
 
+
 logger = get_logger(__name__)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+<<<<<<< Updated upstream
+=======
+# device = torch.device("cpu")
+
+>>>>>>> Stashed changes
 
 class DreamBoothDatasetFromTensor(Dataset):
     """Just like DreamBoothDataset, but take instance_images_tensor instead of path"""
@@ -274,7 +281,7 @@ def parse_args(input_args=None):
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
-        "--logging_dir",
+        "--project_dir",
         type=str,
         default="logs",
         help=(
@@ -385,6 +392,7 @@ def train_one_epoch(
     # Load the tokenizer
 
     unet, text_encoder = copy.deepcopy(models[0]), copy.deepcopy(models[1])
+
     params_to_optimize = itertools.chain(unet.parameters(), text_encoder.parameters())
 
     optimizer = torch.optim.AdamW(
@@ -494,6 +502,8 @@ def pgd_attack(
     """Return new perturbed data"""
 
     unet, text_encoder = models
+    unet.config.addition_embed_type = None
+
     weight_dtype = torch.bfloat16
     device = torch.device("cuda")
 
@@ -573,12 +583,16 @@ def pgd_attack(
 
 
 def main(args):
-    logging_dir = Path(args.output_dir, args.logging_dir)
+    project_dir = Path(args.output_dir, args.project_dir)
 
     accelerator = Accelerator(
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
+<<<<<<< Updated upstream
         # logging_dir=logging_dir,
+=======
+        project_dir=project_dir,
+>>>>>>> Stashed changes
     )
 
     logging.basicConfig(

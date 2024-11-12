@@ -13,6 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
+import torch
+torch.cuda.current_device()
+
 import argparse
 import logging
 import os
@@ -20,7 +23,7 @@ from pathlib import Path
 
 import datasets
 import diffusers
-import torch
+
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
@@ -165,7 +168,7 @@ def parse_args(input_args=None):
     )
     parser.add_argument("--max_grad_norm", default=1.0, type=float, help="Max gradient norm.")
     parser.add_argument(
-        "--logging_dir",
+        "--project_dir",
         type=str,
         default="logs",
         help=(
@@ -452,13 +455,13 @@ def pgd_attack(
 
 
 def main(args):
-    logging_dir = Path(args.output_dir, args.logging_dir)
+    project_dir = Path(args.output_dir, args.project_dir)
 
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
-        logging_dir=logging_dir,
+        project_dir=project_dir,
     )
 
     # Make one log on every process with the configuration for debugging.

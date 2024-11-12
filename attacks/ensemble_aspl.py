@@ -1,3 +1,6 @@
+import torch
+torch.cuda.current_device()
+
 import argparse
 import copy
 import hashlib
@@ -9,7 +12,7 @@ from pathlib import Path
 
 import datasets
 import diffusers
-import torch
+
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
@@ -328,7 +331,7 @@ def parse_args(input_args=None):
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
-        "--logging_dir",
+        "--project_dir",
         type=str,
         default="logs",
         help=(
@@ -603,12 +606,12 @@ def pgd_attack(
 
 
 def main(args):
-    logging_dir = Path(args.output_dir, args.logging_dir)
+    project_dir = Path(args.output_dir, args.project_dir)
 
     accelerator = Accelerator(
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
-        logging_dir=logging_dir,
+        project_dir=project_dir,
     )
 
     logging.basicConfig(

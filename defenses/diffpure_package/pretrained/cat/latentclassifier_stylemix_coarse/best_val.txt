@@ -1,0 +1,1 @@
+Best Epoch 36 Best Val 85.000000

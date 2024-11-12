@@ -2,5 +2,19 @@ data/
 __pycache__
 .vscode
 .DS_Store
+<<<<<<< Updated upstream
 *.xml
 CelebA-HQ/*
+
+
+=======
+*.png
+*.json
+*.jpg
+*.bin
+*.safetensors
+*.params
+*.pth
+*.pt
+*.ckpt
+>>>>>>> Stashed changes

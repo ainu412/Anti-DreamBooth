@@ -140,5 +140,18 @@ python infer.py --model_path <path to DREAMBOOTH model>/checkpoint-1000 --output
 ## Contacts
 If you have any problems, please open an issue in this repository or send an email to [imthanhlv@gmail.com](mailto:imthanhlv@gmail.com).
 
+<<<<<<< Updated upstream
 ## My script to run
 python attacks/aspl.py --pretrained_model_name_or_path "stabilityai/stable-diffusion-2-1-base" --instance_data_dir_for_train data/n000050/set_A --instance_data_dir_for_adversarial data/n000050/set_B --instance_prompt "a photo of sks person" --class_data_dir "data/class-person" --class_prompt "a photo of person"
+=======
+if running on SDXL model: in code, replace all `StableDiffusionPipeline` with `StableDiffusionPipeline`
+
+## How to load already trained model to WebUI
+
+`python convert_diffusers_to_original_stable_diffusion.py --model_path dreambooth-outputs/n000050/checkpoint-1000 --checkpoint_path n000050_steps1000.safetensors --use_safetensors`
+`python convert_diffusers_to_original_stable_diffusion.py --model_path outputs/ASPL/n000050_DREAMBOOTH/checkpoint-1000 --checkpoint_path n000050_aspl_steps1000.safetensors --use_safetensors`
+`python convert_diffusers_to_original_stable_diffusion.py --model_path dreambooth-outputs/n000050_fsmg_ada/checkpoint-1000 --checkpoint_path n000050_fsmg_ada_steps1000.safetensors --u
+se_safetensors`
+
+
+>>>>>>> Stashed changes

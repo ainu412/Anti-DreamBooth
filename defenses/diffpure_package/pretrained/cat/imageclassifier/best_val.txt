@@ -1,0 +1,1 @@
+Best Epoch 482 Best Val 87.83

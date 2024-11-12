@@ -1,0 +1,1 @@
+Best Epoch 49 Best Val 96.127113
