@@ -5,10 +5,10 @@ from contextlib import contextmanager
 
 # from taming.modules.vqvae.quantize import VectorQuantizer2 as VectorQuantizer
 
-from attacks.mist_package.ldm.modules.diffusionmodules.model import Encoder, Decoder
-from attacks.mist_package.ldm.modules.distributions.distributions import DiagonalGaussianDistribution
+from mist_package.ldm.modules.diffusionmodules.model import Encoder, Decoder
+from mist_package.ldm.modules.distributions.distributions import DiagonalGaussianDistribution
 
-from attacks.mist_package.ldm.util import instantiate_from_config
+from mist_package.ldm.util import instantiate_from_config
 
 
 class VQModel(pl.LightningModule):

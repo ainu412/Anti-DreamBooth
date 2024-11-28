@@ -30,11 +30,6 @@ from transformers import AutoTokenizer, PretrainedConfig
 logger = get_logger(__name__)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-<<<<<<< Updated upstream
-=======
-# device = torch.device("cpu")
-
->>>>>>> Stashed changes
 
 class DreamBoothDatasetFromTensor(Dataset):
     """Just like DreamBoothDataset, but take instance_images_tensor instead of path"""
@@ -588,11 +583,8 @@ def main(args):
     accelerator = Accelerator(
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
-<<<<<<< Updated upstream
-        # logging_dir=logging_dir,
-=======
-        project_dir=project_dir,
->>>>>>> Stashed changes
+        # project_dir=project_dir,
+        logging_dir=project_dir,
     )
 
     logging.basicConfig(

@@ -2,7 +2,8 @@ import torch
 import numpy as np
 from tqdm import tqdm
 import torchvision
-from attacks.mist_package.ldm.models.diffusion.ddim import DDIMSampler
+from mist_package.ldm.models.diffusion.ddim import DDIMSampler
+
 import wandb
 
 

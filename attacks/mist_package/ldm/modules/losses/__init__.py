@@ -1,1 +1,1 @@
-from attacks.mist_package.ldm.modules.losses.contperceptual import LPIPSWithDiscriminator
+from mist_package.ldm.modules.losses.contperceptual import LPIPSWithDiscriminator

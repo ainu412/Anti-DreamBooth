@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 from functools import partial
 
-from attacks.mist_package.ldm.modules.diffusionmodules.util import make_ddim_sampling_parameters, make_ddim_timesteps, noise_like, \
+from mist_package.ldm.modules.diffusionmodules.util import make_ddim_sampling_parameters, make_ddim_timesteps, noise_like, \
     extract_into_tensor
 
 

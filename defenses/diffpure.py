@@ -762,5 +762,5 @@ if __name__ == '__main__':
     # os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_ids
     for img_id in args.img_ids:
         for adv_algorithm in args.attacks:
-            img_path = f'{args.dataset_name}/{img_id}_{adv_algorithm}'
+            img_path = f'dataset/{args.dataset_name}/{img_id}_{adv_algorithm}'
             main(args, config, img_path)

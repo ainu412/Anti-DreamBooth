@@ -83,7 +83,7 @@ def main():
 
     for attack in args.attacks:
         for img_id in args.img_ids:
-            img_path = f"{args.dataset_name}/{img_id}_{attack}"
+            img_path = f"dataset/{args.dataset_name}/{img_id}_{attack}"
             cleaning(img_path)
 
 

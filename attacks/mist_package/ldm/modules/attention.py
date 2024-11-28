@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from torch import nn, einsum
 from einops import rearrange, repeat
 
-from attacks.mist_package.ldm.modules.diffusionmodules.util import checkpoint
+from mist_package.ldm.modules.diffusionmodules.util import checkpoint
 
 
 def exists(val):

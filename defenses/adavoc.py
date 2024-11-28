@@ -549,7 +549,7 @@ def cleaning(img_path):
     from adavoc_package.model import networks
     num_classes = len(labelmap) + 1  # +1 for background
     net = build_ssd('test', 300, num_classes)  # initialize SSD
-    model_path = 'adavoc_package/model_det_NoD/ssd/ssd_300_VOC0712.pth'
+    model_path = 'defenses/adavoc_package/model_det_NoD/ssd/ssd_300_VOC0712.pth'
     net.load_state_dict(torch.load(model_path))
     net.eval()
     print('Finished loading model!')
@@ -571,7 +571,7 @@ def cleaning(img_path):
     netG = networks.define_G(input_nc, output_nc, ngf, netG,
                              n_downsample_global, n_blocks_global, n_local_enhancers,
                              n_blocks_local, norm, gpu_ids=gpu_ids)
-    save_path = 'adavoc_package/checkpoints/voc0712_model_ssd/latest_net_G.pth'
+    save_path = 'defenses/adavoc_package/checkpoints/voc0712_model_ssd/latest_net_G.pth'
     save_path_list = [save_path]
 
     if args.cuda:
@@ -582,7 +582,7 @@ def cleaning(img_path):
     img_dim = 300
     num_classes = 21
     net_black = build_net('test', img_dim, num_classes)  # initialize detector
-    model_black_path = 'adavoc_package/model_det_NoD/rbfnet/RFBNet300_VOC_80_7.pth'
+    model_black_path = 'defenses/adavoc_package/model_det_NoD/rbfnet/RFBNet300_VOC_80_7.pth'
     state_dict = torch.load(model_black_path)
     from collections import OrderedDict
     new_state_dict = OrderedDict()
@@ -682,6 +682,6 @@ if __name__ == "__main__":
 
     for img_id in args.img_ids:
         for adv_algorithm in args.attacks:
-            img_path = f'{args.dataset_name}/{img_id}_{adv_algorithm}'
+            img_path = f'dataset/{args.dataset_name}/{img_id}_{adv_algorithm}'
 
             cleaning_folder(img_path)

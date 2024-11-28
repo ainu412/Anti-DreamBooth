@@ -6,7 +6,7 @@ from einops import rearrange, repeat
 from transformers import CLIPTokenizer, CLIPTextModel
 import kornia
 
-from attacks.mist_package.ldm.modules.x_transformer import Encoder, TransformerWrapper  # TODO: can we directly rely on lucidrains code and simply add this as a reuirement? --> test
+from mist_package.ldm.modules.x_transformer import Encoder, TransformerWrapper  # TODO: can we directly rely on lucidrains code and simply add this as a reuirement? --> test
 
 
 class AbstractEncoder(nn.Module):
@@ -229,6 +229,6 @@ class FrozenClipImageEmbedder(nn.Module):
 
 
 if __name__ == "__main__":
-    from attacks.mist_package.ldm.util import count_params
+    from mist_package.ldm.util import count_params
     model = FrozenCLIPEmbedder()
     count_params(model, verbose=True)

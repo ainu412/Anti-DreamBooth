@@ -8,7 +8,7 @@ import torch as th
 import torch.nn as nn
 import torch.nn.functional as F
 
-from attacks.mist_package.ldm.modules.diffusionmodules.util import (
+from mist_package.ldm.modules.diffusionmodules.util import (
     checkpoint,
     conv_nd,
     linear,
@@ -17,7 +17,7 @@ from attacks.mist_package.ldm.modules.diffusionmodules.util import (
     normalization,
     timestep_embedding,
 )
-from attacks.mist_package.ldm.modules.attention import SpatialTransformer
+from mist_package.ldm.modules.attention import SpatialTransformer
 
 
 # dummy replace

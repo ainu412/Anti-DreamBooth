@@ -31,7 +31,7 @@ def run(img_path, args, save_imgs='true'):
     image_tensor = PIL2tensor(img_pil).cuda()
 
     # load ape-gan
-    model_point = torch.load("./CNN/cifar_cnn.tar")
+    model_point = torch.load("defenses/ape_package/CNN/cifar_cnn.tar")
     gan_point = torch.load(args.gan_path)
 
     CNN = load_cnn(args)
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     parser.add_argument("--attacks", type=str, nargs='+', default=['metacloak', 'aspl', 'glaze', 'mist'])
     parser.add_argument("--data", type=str, nargs='+', default="cifar")
     parser.add_argument("--eps", type=float, default=0.15)
-    parser.add_argument("--gan_path", type=str, default="./checkpoint/cifar.tar")
+    parser.add_argument("--gan_path", type=str, default="defenses/ape_package/checkpoint/cifar.tar")
     args = parser.parse_args()
 
     for img_id in args.img_ids:
         for adv_algorithm in args.attacks:
-            img_path = f'{args.dataset_name}/{img_id}_{adv_algorithm}'
+            img_path = f'dataset/{args.dataset_name}/{img_id}_{adv_algorithm}'
             main(args, img_path)

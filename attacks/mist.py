@@ -16,9 +16,9 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
 from pytorch_lightning import seed_everything
-from attacks.mist_package.ldm.util import instantiate_from_config
+from mist_package.ldm.util import instantiate_from_config
 from advertorch.attacks import LinfPGDAttack
-from attacks.mist_package.diffprotect_attacks import Linf_PGD, SDEdit
+from mist_package.diffprotect_attacks import Linf_PGD, SDEdit
 import time
 import wandb
 import glob
@@ -461,5 +461,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     for img_id in args.img_ids:
-        img_path = f"{args.dataset_name}/{img_id}"
+        img_path = f"dataset/{args.dataset_name}/{img_id}"
         main(img_path, img_id, args)

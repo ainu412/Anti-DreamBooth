@@ -144,16 +144,13 @@ def matching_score_genimage_id_alternate(images_path, list_id_path):
         return ave_ism/len(image_list), fail_detection_count/len(image_list)
     return None, 1
 
-def matching_score_genimage_id_li(images_path, list_id_path):
-    image_list = os.listdir(images_path)
+def matching_score_genimage_id_li(image_list, list_id_path):
     detection_li = []
     ism_li = []
     avg_embedding = compute_idx_embedding(list_id_path)
 
-    for image_name in image_list:
-        image_path = os.path.join(images_path, image_name)
+    for image_path in image_list:
         ism = matching_score_id(image_path, avg_embedding)
-        # print('img path', image_path)
         if ism is None:
             detection_li.append(0)
             ism_li.append(0)

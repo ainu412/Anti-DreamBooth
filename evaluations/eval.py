@@ -37,7 +37,7 @@ def main(args):
                 if args.generated:
                     img_path = f"dreambooth-outputs/{img_id}{img_suffix}/checkpoint-1000/dreambooth/{prompt}/"
                 else:
-                    img_path = f"{args.dataset}/{img_id}{img_suffix}" if img_suffix else f"{args.dataset}/{img_id}{img_suffix}/set_B"
+                    img_path = f"{args.dataset_name}/{img_id}{img_suffix}" if img_suffix else f"{args.dataset_name}/{img_id}{img_suffix}/set_B"
 
                 # check image path exist or not
                 if not os.path.exists(img_path):
@@ -57,7 +57,9 @@ def main(args):
                 result_dic = dict()
                 result_dic['img'] = img_id + img_suffix
 
-                clean_img_paths = [f"{args.dataset}/{img_id}/set_A", f"{args.dataset}/{img_id}/set_B", f"{args.dataset}/{img_id}/set_C"]
+                clean_img_paths = [f"dataset/{args.dataset_name}/{img_id}/set_A",
+                                   f"dataset/{args.dataset_name}/{img_id}/set_B",
+                                   f"dataset/{args.dataset_name}/{img_id}/set_C"]
 
                 ism, fdfr = matching_score_genimage_id(img_path, clean_img_paths)
                 result_dic['ism'] = '%.4f' % ism if ism is not None else 0
@@ -74,7 +76,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", type=str, default='myfriends')
+    parser.add_argument("--dataset_name", type=str, default='myfriends')
     parser.add_argument("--img_ids", type=str, nargs='+', default=myfriends_img_id_list)
     parser.add_argument("--attacks", type=str, nargs='+', default=attacks)
     parser.add_argument("--defenses", type=str, nargs='+', default=defenses)

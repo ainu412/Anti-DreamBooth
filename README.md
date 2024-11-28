@@ -140,7 +140,7 @@ python infer.py --model_path <path to DREAMBOOTH model>/checkpoint-1000 --output
 ## Contacts
 If you have any problems, please open an issue in this repository or send an email to [imthanhlv@gmail.com](mailto:imthanhlv@gmail.com).
 
-<<<<<<< Updated upstream
+
 ## My script to run
 python attacks/aspl.py --pretrained_model_name_or_path "stabilityai/stable-diffusion-2-1-base" --instance_data_dir_for_train data/n000050/set_A --instance_data_dir_for_adversarial data/n000050/set_B --instance_prompt "a photo of sks person" --class_data_dir "data/class-person" --class_prompt "a photo of person"
 =======
@@ -153,5 +153,6 @@ if running on SDXL model: in code, replace all `StableDiffusionPipeline` with `S
 `python convert_diffusers_to_original_stable_diffusion.py --model_path dreambooth-outputs/n000050_fsmg_ada/checkpoint-1000 --checkpoint_path n000050_fsmg_ada_steps1000.safetensors --u
 se_safetensors`
 
-
->>>>>>> Stashed changes
+attacks
+For ASPL(in Anti-dreambooth), MetaCloak, and Mist, please use the python scripts in the folder `scripts`
+For Glaze, download at https://glaze.cs.uchicago.edu/downloads.html for the latest Glaze 2.1.
