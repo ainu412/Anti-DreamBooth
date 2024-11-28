@@ -14,7 +14,7 @@ if [ -z "$defense_sample_num" ]; then
   defense_sample_num=1
 fi
 
-cd $ADB_PROJECT_ROOT/robust_facecloak
+cd $ADB_PROJECT_ROOT/attacks/metacloak_package/robust_facecloak
 # skip if noise exists 
 if [ ! -d "$INSTANCE_DIR_CHECK" ]; then 
   {

@@ -27,7 +27,7 @@
 # ---6.jpg
 # ---7.jpg
 
-python evaluations/eval.py --dataset_name myfriends --img_ids chengyu --attacks aspl glaze metacloak mist --defenses bf gn bf_gn gn_bf diffpure ape adavoc pdmpure
+python evaluations/eval.py --dataset_name celeb20 --img_ids ariana bruce taylor --attacks aspl glaze metacloak mist --defenses bf gn bf_gn gn_bf diffpure ape adavoc pdmpure
 
 
 
