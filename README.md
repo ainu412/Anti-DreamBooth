@@ -156,3 +156,29 @@ se_safetensors`
 attacks
 For ASPL(in Anti-dreambooth), MetaCloak, and Mist, please use the python scripts in the folder `scripts`
 For Glaze, download at https://glaze.cs.uchicago.edu/downloads.html for the latest Glaze 2.1.
+
+
+## model can be downloaded in:
+paths:
+evaluations\FaceImageQuality\insightface\model\insightface-0000.params
+evaluations\FaceImageQuality\insightface\mtcnn-model\det1-0001.params
+evaluations\FaceImageQuality\insightface\mtcnn-model\det2-0001.params
+evaluations\FaceImageQuality\insightface\mtcnn-model\det3-0001.params
+evaluations\FaceImageQuality\insightface\mtcnn-model\det4-0001.params
+
+defenses\adavoc_package\checkpoints\voc0712_model_ssd\latest_net_G.pth
+defenses\adavoc_package\model_det_NoD\rbfnet\RFBNet300_VOC_80_7.pth
+defenses\adavoc_package\model_det_NoD\ssd\ssd_300_VOC0712.pth
+defenses\diffpure_package\pretrained
+hub\checkpoints\checkpoint_liberty_with_aug.pth
+
+attacks\metacloak_package\LIQE\checkpoints\LIQE.pt
+defenses\diffpure_package\pretrained_other\256x256_diffusion_uncond.pt
+
+attacks\metacloak_package\SD\v2-1_512-ema-pruned.ckpt
+attacks\mist_package\model.ckpt
+defenses\diffpure_package\pretrained_other\celeba_hq.ckpt
+
+
+
+

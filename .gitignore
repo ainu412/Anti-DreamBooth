@@ -2,18 +2,13 @@ data/
 __pycache__
 .vscode
 .DS_Store
-<<<<<<< Updated upstream
-*.xml
-CelebA-HQ/*
 
+dreambooth-outputs/*
+outputs/*
 
-=======
+*.params
 *.png
 *.jpg
-*.bin
-*.safetensors
-*.params
 *.pth
 *.pt
 *.ckpt
->>>>>>> Stashed changes

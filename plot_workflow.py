@@ -79,7 +79,7 @@ if __name__ == '__main__':
     # Load your images (replace with actual paths to your image files)
     dataset = 'myfriends'
     name = 'chengyu'
-    attack_name = 'glaze'
+    attack_name = 'aspl'
     defense_names = ['bf', 'gn', 'bf_gn', 'gn_bf', 'pdmpure', 'diffpure', 'adavoc', 'ape']
     left_images_row0 = [Image.open(i) for i in glob.glob(f'dataset/{dataset}/{name}/set_B/*')]
     img_size = left_images_row0[0].size

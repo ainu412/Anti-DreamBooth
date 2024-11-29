@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="79d417df-9e33-4295-87aa-c59a5b53a4d1" name="SoC cluster">
+        <fileTransfer accessType="SFTP" host="xlogin.comp.nus.edu.sg" port="22" sshConfigId="003f071b-8789-46fe-b5b8-2b378bc83911" sshConfig="ziguo@xlogin.comp.nus.edu.sg:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

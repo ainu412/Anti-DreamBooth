@@ -12,7 +12,6 @@ torchvision==0.14.1
 --extra-index-url https://download.pytorch.org/whl/cu116
 triton==2.0.0
 xformers==0.0.16
-=======
 omegaconf==2.1.1
 einops
 pytorch-lightning==1.4.2
@@ -30,5 +29,3 @@ scikit-learn
 -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
 -e git+https://github.com/openai/CLIP.git@main#egg=clip
 advertorch@git+https://github.com/BorealisAI/advertorch.git
-
->>>>>>> Stashed changes
